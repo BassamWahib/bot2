@@ -5,6 +5,13 @@ from PIL import Image
 
 import nest_asyncio
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes, MessageHandler, filters
+from fastapi import FastAPI
+from fastapi.responses import FileResponse
+from fastapi import UploadFile, HTTPException
+
+
+
+app = FastAPI()
 
 TOKEN = "6705629015:AAEGa-InW-23Vl-WsidDmU_qT1uZTRlwWo4"
 
