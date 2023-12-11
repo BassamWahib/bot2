@@ -35,7 +35,18 @@ async def process_image(photo_name: str):
     return output_photo_path
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    # ... (other code remains the same)
+    if filters.PHOTO.check_update(update):
+        file_id = update.message.photo[-1].file_id
+        unique_file_id = update.message.photo[-1].file_unique_id
+        photo_name = f'{unique_file_id}.jpg'
+
+    elif filters.Document.IMAGE:
+        file_id = update.message.document.file_id
+        _, f_ext = os.path.splitext(update.message.document.file_name)
+        unique_file_id = update.message.document.file_unique_id
+        photo_name = f'{unique_file_id}.{f_ext}'
+
+    photo_file = await context.bot.get_file(file_id)
 
     file_path = os.path.join(temp_folder, photo_name)
     await photo_file.download_to_drive(custom_path=file_path)
