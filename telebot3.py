@@ -5,6 +5,8 @@ from PIL import Image
 
 import nest_asyncio
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes, MessageHandler, filters
+from fastapi import FastAPI, UploadFile, HTTPException
+from fastapi.responses import FileResponse
 
 nest_asyncio.apply()
 
